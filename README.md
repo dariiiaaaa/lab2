@@ -59,4 +59,4 @@ python -m jupyter nbconvert --to html --no-input --output-dir reports --output t
 
 ## Автор
 
-Глазков Тимофей Владимирович, группа БИ ОЗФО5-1.
+Кузнецова Дарья Михайловна, группа БИ ОЗФО5-1.
