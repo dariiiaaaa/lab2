@@ -1,0 +1,165 @@
+{
+  "task_id": 2,
+  "title": "Расчёт критической массы и ценности социальной сети",
+  "student_name": "Глазков Тимофей Владимирович",
+  "group": "БИ ОЗФО5-1",
+  "date": "02.09.2026",
+  "project_name": "ГородСоцСеть",
+  "source": {
+    "lecture_number": 3,
+    "lecture_pages": "44–49",
+    "assignment_source": "Экономика-информатизации.pdf",
+    "methodological_note": "Проверка расчётов выполнена независимо от приведённого в учебнике решения"
+  },
+  "market_potential_users": 1000000,
+  "initial_users": 5000,
+  "growth_before_critical": 0.03,
+  "growth_after_critical": 0.15,
+  "network_value_coefficient_rub_per_user_squared": 0.005,
+  "monthly_maintenance_cost_rub": 2000000,
+  "cac_rub": 500,
+  "arpu_rub_per_user_month": 15,
+  "analysis_horizon_months": 36,
+  "horizon_months": 36,
+  "annual_discount_rate": 0.12,
+  "monthly_discount_rate": 0.009488792934,
+  "discounting": {
+    "rate_type": "annual_effective",
+    "period_timing": "end_of_month",
+    "derive_monthly_from_annual": true
+  },
+  "operational_scenario": {
+    "name": "Операционная гипотеза снижения CAC",
+    "cac_rub": 50,
+    "description": "Управленческое допущение о снижении CAC за счёт реферальных и вирусных механик"
+  },
+  "scenarios": {
+    "Пессимистичный": {
+      "growth_before": 0.02,
+      "growth_after": 0.10
+    },
+    "Базовый": {
+      "growth_before": 0.03,
+      "growth_after": 0.15
+    },
+    "Оптимистичный": {
+      "growth_before": 0.05,
+      "growth_after": 0.20
+    }
+  },
+  "combined_scenario": {
+    "name": "Локальный пилот с улучшенной экономикой",
+    "arpu_rub_per_user_month": 30,
+    "cac_rub": 20,
+    "growth_before_critical": 0.15,
+    "growth_after_critical": 0.15,
+    "monthly_maintenance_cost_rub": 200000,
+    "target_npv_rub": 0,
+    "target_profit_rub": 0,
+    "description": "Согласованный вариант одновременного повышения ARPU, снижения CAC и затрат на поддержание"
+  },
+  "analysis_targets": {
+    "break_even_npv_rub": 0,
+    "target_npv_rub": 10000000,
+    "target_advance_months": 6,
+    "target_profit_rub": 0
+  },
+  "scenario_constraints": {
+    "max_arpu_rub": 200,
+    "min_arpu_rub": 0,
+    "max_cac_rub": 1000,
+    "min_cac_rub": 0,
+    "max_growth_before": 1.0,
+    "min_growth_before": 0,
+    "max_maintenance_rub": 5000000,
+    "min_maintenance_rub": 0,
+    "fixed_fields": []
+  },
+  "sensitivity": {
+    "relative_values": [-0.30, -0.20, -0.10, 0.00, 0.10, 0.20, 0.30],
+    "growth_search_max": 1.0,
+    "arpu_search_max_multiplier": 20,
+    "max_cac_search": 1000000
+  },
+  "assumptions": [
+    {
+      "id": "no_churn",
+      "name": "Отсутствие оттока",
+      "value": true,
+      "unit": "boolean",
+      "source": "not specified in assignment",
+      "editable": true,
+      "rationale": "В условии не задан churn, поэтому база пользователей только растёт"
+    },
+    {
+      "id": "arpu_is_revenue",
+      "name": "ARPU трактуется как выручка",
+      "value": true,
+      "unit": "boolean",
+      "source": "model assumption",
+      "editable": true,
+      "rationale": "Переменная маржа и налоги в условии не заданы"
+    },
+    {
+      "id": "metcalfe_is_potential_value",
+      "name": "Закон Мэткалфа показывает потенциальную сетевую ценность",
+      "value": true,
+      "unit": "boolean",
+      "source": "lecture theory",
+      "editable": false,
+      "rationale": "V(N)=k×N² не является бухгалтерской оценкой или денежным потоком"
+    }
+  ],
+  "units": {
+    "financial_currency": "RUB",
+    "financial_scale": "unit",
+    "time_unit": "month",
+    "growth_unit": "share_per_month",
+    "user_unit": "person",
+    "network_value_unit": "RUB"
+  },
+  "calendar": {
+    "months_per_year": 12,
+    "analysis_horizon_years": 3,
+    "analysis_horizon_months": 36,
+    "year_numbering": "1-based"
+  },
+  "validation": {
+    "positive_fields": ["market_potential_users", "initial_users", "analysis_horizon_months"],
+    "non_negative_fields": ["network_value_coefficient_rub_per_user_squared", "monthly_maintenance_cost_rub", "cac_rub", "arpu_rub_per_user_month"],
+    "share_fields": ["growth_before_critical", "growth_after_critical", "annual_discount_rate", "monthly_discount_rate"],
+    "share_range": [0, 1],
+    "consistency_checks": [
+      "analysis_horizon_months == analysis_horizon_years * months_per_year",
+      "initial_users <= market_potential_users"
+    ],
+    "on_error": "raise"
+  },
+  "display": {
+    "display_scale_rub": 1000000,
+    "currency_digits": 2,
+    "percent_digits": 1,
+    "quantity_digits": 0,
+    "figure_dpi": 140,
+    "figure_width": 10,
+    "figure_height": 5,
+    "color_palette": ["#355C7D", "#6C5B7B", "#C06C84", "#F67280", "#99B898"],
+    "show_code_in_html": false,
+    "show_index_in_tables": false
+  },
+  "charts": {
+    "users_scenarios": true,
+    "network_value": true,
+    "monthly_profit": true,
+    "cash_flow": true,
+    "sensitivity": true,
+    "scenario_comparison": true
+  },
+  "export": {
+    "notebook_filename": "task_02_social_network.ipynb",
+    "html_filename": "task_02_report.html",
+    "archive_filename": "eoi-e2.zip",
+    "html_exclude_input": true,
+    "exclude_patterns": [".git", ".ipynb_checkpoints", "__pycache__"]
+  }
+}
